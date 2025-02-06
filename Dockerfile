@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # Copiar e instalar dependências do Python
-COPY app/requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Copiar os arquivos do projeto
@@ -20,8 +20,8 @@ COPY . .
 EXPOSE 8282
 
 # Definir variáveis de ambiente
-ENV FLASK_APP=main.py
+ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
 
 # Iniciar a aplicação com Gunicorn
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8282", "app.main:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8282", "app:app"]
