@@ -1,24 +1,35 @@
+import os
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, IntegerField, PasswordField, BooleanField
+from wtforms import StringField, PasswordField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo, Optional
+from flask_migrate import Migrate
 
-# Inicialização do Flask, SQLAlchemy e Bcrypt
+# Configuração do Flask
 app = Flask(__name__, static_folder="static", template_folder="templates")
-app.config['SECRET_KEY'] = 'secretkey'  # Chave secreta para formulários
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'  # Banco de dados SQLite
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'chave_secreta_padrao')  # Chave secreta vinda do ambiente
+
+# Configuração do Banco de Dados MySQL no PythonAnywhere
+USERNAME = os.getenv('DB_USERNAME', 'papadobradofc')
+PASSWORD = os.getenv('DB_PASSWORD', 'minha_senha_segura')  # Defina isso no ambiente
+HOST = os.getenv('DB_HOST', 'papadobradofc.mysql.pythonanywhere-services.com')
+DATABASE = os.getenv('DB_NAME', 'papadobradofc$default')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?charset=utf8mb4'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Inicializa as extensões
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
+migrate = Migrate(app, db)
 
 # Modelo de Usuário
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(25), unique=True, nullable=False)
-    numero_camisa = db.Column(db.SmallInteger, nullable=False)  # Número de camisa deve ser um inteiro pequeno
+    numero_camisa = db.Column(db.SmallInteger, nullable=False)
     nome_completo = db.Column(db.String(120), nullable=False)
     is_policial_penal = db.Column(db.Boolean, nullable=False, default=False)
     is_associado = db.Column(db.Boolean, nullable=False, default=False)
@@ -35,8 +46,8 @@ class RegistrationForm(FlaskForm):
     is_mensalista = BooleanField('Mensalista na Pelada?', validators=[Optional()])
     password = PasswordField('Senha', validators=[DataRequired()])
     confirm_password = PasswordField('Confirmação de Senha', validators=[DataRequired(), EqualTo('password', message='As senhas não coincidem')])
-    
-# Rota para a Página de Cadastro
+
+# Rota para Cadastro
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
@@ -54,10 +65,10 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Sua conta foi criada com sucesso!', 'success')
-        return redirect(url_for('login'))  # Direciona para a página de login após o cadastro
+        return redirect(url_for('index'))
     return render_template('register.html', title='Cadastro', form=form)
 
-# Página Inicial (Login ou home)
+# Página Inicial
 @app.route("/")
 def index():
     return render_template('index.html')
