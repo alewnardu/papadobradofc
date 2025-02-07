@@ -6,6 +6,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo, Optional
 from flask_migrate import Migrate
+from urllib.parse import quote
 
 # Configuração do Flask
 app = Flask(__name__, static_folder="static", template_folder="templates")
@@ -23,7 +24,18 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'chave_secreta_padrao')  # Ch
 # app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?charset=utf8mb4'
 
 DATABASE_URI = os.getenv('DB_URI', '')
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
+
+if DATABASE_URI:
+
+# Escapar a senha na URL (parte após o : no "usuario:senha")
+    user_password_part = DATABASE_URI.split('@')[0]
+    user, password = user_password_part.split(':')
+    password = quote(password)  # Escapar a senha
+
+    # Reconstruir a URL corrigida
+    DATABASE_URI = DATABASE_URI.replace(f'{user}:{password}', f'{user}:{password}')
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializa as extensões
