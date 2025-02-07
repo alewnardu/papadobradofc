@@ -9,7 +9,7 @@ def login():
     form = LoginForm()
     return render_template("auth/login.html", form=form)
 
-@app.route('/logout')
+@auth_bp.route('/logout')
 def logout():
     logout_user()
     flash('Sessão encerrada!', 'success')
