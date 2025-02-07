@@ -2,7 +2,8 @@ import os
 
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'minha_chave_secreta')
-    
+    WTF_CSRF_ENABLED = True
+
     # Banco de dados MySQL
     USERNAME = os.getenv('DB_USERNAME', 'admin')
     PASSWORD = os.getenv('DB_PASSWORD', 'password')
