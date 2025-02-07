@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for, flash
 from app.apps.auth.forms import LoginForm
 from flask_login import logout_user
 
@@ -9,13 +9,11 @@ def login():
     form = LoginForm()
     return render_template("auth/login.html", form=form)
 
-
 @app.route('/logout')
 def logout():
     logout_user()
     flash('Sessão encerrada!', 'success')
     return redirect(url_for('index'))
-
 
 @auth_bp.route("/register")
 def register():
