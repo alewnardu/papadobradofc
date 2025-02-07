@@ -13,7 +13,7 @@ def login():
 def logout():
     logout_user()
     flash('Sessão encerrada!', 'success')
-    return redirect(url_for('index'))
+    return render_template('index.html')
 
 @auth_bp.route("/register")
 def register():
