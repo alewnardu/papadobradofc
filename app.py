@@ -12,15 +12,18 @@ app = Flask(__name__, static_folder="static", template_folder="templates")
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'chave_secreta_padrao')  # Chave secreta vinda do ambiente
 
 # Configuração do Banco de Dados MySQL no PythonAnywhere
-USERNAME = os.getenv('DB_USERNAME', 'papadobradofc')
-db_password = os.getenv('DB_PASSWORD', 'minha_senha_segura')  # Defina isso no ambiente
-PASSWORD = db_password.replace("\\@", "@")  # Corrige caso o $ tenha sido escapado
+# USERNAME = os.getenv('DB_USERNAME', 'papadobradofc')
+# db_password = os.getenv('DB_PASSWORD', 'minha_senha_segura')  # Defina isso no ambiente
+# PASSWORD = db_password.replace("\\@", "@")  # Corrige caso o $ tenha sido escapado
 
-HOST = os.getenv('DB_HOST', 'papadobradofc.mysql.pythonanywhere-services.com')
-db_name = os.getenv('DB_NAME', 'papadobradofc$default')
-DATABASE = db_name.replace("\\$", "$")  # Corrige caso o $ tenha sido escapado
+# HOST = os.getenv('DB_HOST', 'papadobradofc.mysql.pythonanywhere-services.com')
+# db_name = os.getenv('DB_NAME', 'papadobradofc$default')
+# DATABASE = db_name.replace("\\$", "$")  # Corrige caso o $ tenha sido escapado
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?charset=utf8mb4'
+# app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?charset=utf8mb4'
+
+DATABASE_URI = os.getenv('DB_URI', f'mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?charset=utf8mb4')
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializa as extensões
