@@ -4,6 +4,12 @@ from app.extensions import db, bcrypt, migrate, login_manager
 from flask_login import current_user
 from app.apps.auth.routes import auth_bp
 from app.apps.jogador.routes import jogador_bp
+from app.models import User  # Importe o modelo User, se necessário
+
+# Função user_loader para carregar o usuário
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))  # Ajuste conforme sua tabela de usuários
 
 def create_app():
     app = Flask(__name__, static_folder="static", template_folder="templates")
