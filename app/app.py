@@ -4,7 +4,7 @@ from app.extensions import db, bcrypt, migrate, login_manager
 from flask_login import current_user
 from app.apps.auth.routes import auth_bp
 from app.apps.jogador.routes import jogador_bp
-from app.models import User  # Certifique-se de que o modelo User está correto
+from app.apps.auth.models import User
 
 # Função user_loader para carregar o usuário
 @login_manager.user_loader
