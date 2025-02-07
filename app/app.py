@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from app.config import Config
-from app.extensions import db, bcrypt, migrate
+from app.extensions import db, bcrypt, migrate, login_manager
+from flask_login import current_user
 from app.apps.auth.routes import auth_bp
 from app.apps.jogador.routes import jogador_bp
 
@@ -12,11 +13,16 @@ def create_app():
     db.init_app(app)
     bcrypt.init_app(app)
     migrate.init_app(app, db)
+    login_manager.init_app(app)
 
     # Registrar Blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(jogador_bp)
 
+    @app.context_processor
+    def inject_user():
+        return dict(current_user=current_user)
+    
     @app.route('/')
     def index():
         return render_template('index.html')
