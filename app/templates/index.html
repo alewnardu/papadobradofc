@@ -9,23 +9,37 @@
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="{{ url_for('index') }}">Papa Dobrado</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Início</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Login</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}">Cadastro</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('jogador.listar_jogadores') }}">Jogadores</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Partidas</a></li>
-          </ul>
-        </div>
+          <a class="navbar-brand" href="{{ url_for('index') }}">Papa Dobrado</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('index') }}">Início</a>
+                  </li>
+                  
+                  {% if current_user.is_authenticated %}
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('perfil') }}">Perfil</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link text-danger" href="{{ url_for('auth.logout') }}">Sair</a>
+                      </li>
+                  {% else %}
+                      <li class="nav-item">
+                          <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                      </li>
+                  {% endif %}
+              </ul>
+          </div>
       </div>
-    </nav>
+  </nav>
 
     <!-- Conteúdo Principal -->
     <div class="container mt-4">
