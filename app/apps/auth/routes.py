@@ -15,6 +15,7 @@ def logout():
     flash('Sessão encerrada!', 'success')
     return render_template('index.html')
 
-@auth_bp.route("/register")
+@auth_bp.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template('auth/register.html')
+    form = LoginForm()
+    return render_template('auth/register.html', form=form)
