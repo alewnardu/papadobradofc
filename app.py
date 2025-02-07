@@ -54,20 +54,25 @@ class RegistrationForm(FlaskForm):
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(
-            username=form.username.data,
-            numero_camisa=int(form.numero_camisa.data),
-            nome_completo=form.nome_completo.data,
-            is_policial_penal=form.is_policial_penal.data or False,
-            is_associado=form.is_associado.data or False,
-            is_mensalista=form.is_mensalista.data or False,
-            password=hashed_password
-        )
-        db.session.add(user)
-        db.session.commit()
-        flash('Sua conta foi criada com sucesso!', 'success')
-        return redirect(url_for('index'))
+        try:
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+            user = User(
+                username=form.username.data,
+                numero_camisa=int(form.numero_camisa.data),
+                nome_completo=form.nome_completo.data,
+                is_policial_penal=form.is_policial_penal.data or False,
+                is_associado=form.is_associado.data or False,
+                is_mensalista=form.is_mensalista.data or False,
+                password=hashed_password
+            )
+            db.session.add(user)
+            db.session.commit()
+            flash('Sua conta foi criada com sucesso!', 'success')
+            return redirect(url_for('index'))
+        except Exception as e:
+            db.session.rollback()  # Rollback caso ocorra erro
+            flash(f'Ocorreu um erro ao tentar criar sua conta: {str(e)}', 'danger')
+            return redirect(url_for('register'))
     return render_template('register.html', title='Cadastro', form=form)
 
 # Página Inicial
