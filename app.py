@@ -18,8 +18,8 @@ PASSWORD = os.getenv('DB_PASSWORD', 'minha_senha_segura')  # Defina isso no ambi
 HOST = os.getenv('DB_HOST', 'papadobradofc.mysql.pythonanywhere-services.com')
 DATABASE = os.getenv('DB_NAME', 'papadobradofc$default')
 
-# DATABASE_URI = os.getenv('DB_URI', 'mysql+pymysql://papadobradofc:@papadobradofc.mysql.pythonanywhere-services.com/papadobradofc')
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?charset=utf8mb4'
+DATABASE_URI = os.getenv('DB_URI', 'mysql+pymysql://papadobradofc:papadobradofc.mysql.pythonanywhere-services.com/papadobradofc')
+# app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}/{DATABASE}?charset=utf8mb4'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializa as extensões
