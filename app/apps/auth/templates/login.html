@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Papo Dobrado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST" action="{{ url_for('auth.login') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="username">Nome de Usuário</label>
+                {{ form.username(class="form-control", id="username") }}
+            </div>
+            <div class="form-group">
+                <label for="password">Senha</label>
+                {{ form.password(class="form-control", id="password") }}
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+        <p>Não tem uma conta? <a href="{{ url_for('auth.register') }}">Cadastre-se</a></p>
+    </div>
+</body>
+</html>
