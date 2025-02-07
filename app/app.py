@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template
+from flask import Flask, render_template
 from app.config import Config
 from app.extensions import db, bcrypt, migrate
 from app.apps.auth.routes import auth_bp
