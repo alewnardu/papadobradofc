@@ -17,6 +17,10 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(jogador_bp)
 
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+
     return app
 
 if __name__ == "__main__":
