@@ -1,24 +1,40 @@
+/* Definição das cores principais */
+:root {
+    --primary-green: #01875f;
+    --light-green: #4CAF50;
+    --dark-green: #016c4b;
+    --text-light: #ffffff;
+    --text-dark: #222222;
+    --bg-light: #f4f4f4;
+    --bg-dark: #1e1e1e;
+}
+
+/* Estilos gerais */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
     margin: 0;
     padding: 0;
 }
 
+/* Contêiner */
 .container {
     max-width: 600px;
     margin: 50px auto;
-    background-color: #a3b98e;
+    background-color: var(--primary-green);
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Títulos */
 h2 {
     text-align: center;
-    color: white; /* Texto branco em fundo claro */
+    color: var(--text-light);
     font-weight: bold;
 }
 
+/* Formulários */
 .form-group {
     margin-bottom: 20px;
 }
@@ -30,37 +46,43 @@ h2 {
     border-radius: 5px;
 }
 
+/* Botões */
 .btn {
-    background-color: #28a745; /* Verde para fundo claro */
-    color: white;
-    font-weight: bold; /* Texto mais forte */
+    background-color: var(--primary-green);
+    color: var(--text-light);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .btn:hover {
-    background-color: #218838; /* Verde mais escuro no hover */
+    background-color: var(--dark-green);
 }
 
-/* Ajustes para fundos escuros */
+/* Modo escuro */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #333;
-        color: white;
+        background-color: var(--bg-dark);
+        color: var(--text-light);
     }
+
     .container {
-        background-color: #555;
+        background-color: var(--dark-green);
     }
+
     h2 {
-        color: black; /* Texto preto em fundo escuro */
+        color: var(--text-light);
     }
+
     .btn {
-        background-color: #ffc107; /* Amarelo para fundo escuro */
-        color: black;
+        background-color: var(--light-green);
+        color: var(--text-dark);
     }
+
     .btn:hover {
-        background-color: #e0a800; /* Amarelo mais escuro no hover */
+        background-color: var(--primary-green);
+        color: var(--text-light);
     }
 }
