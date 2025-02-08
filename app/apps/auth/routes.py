@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from app.apps.auth.forms import LoginForm
+from app.apps.auth.forms import LoginForm, RegistrationForm
 from flask_login import logout_user
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth',template_folder="../../templates/")
@@ -17,5 +17,5 @@ def logout():
 
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
-    form = LoginForm()
+    form = RegistrationForm()
     return render_template('auth/register.html', form=form)
