@@ -6,4 +6,4 @@ flask-bcrypt
 flask-migrate
 gunicorn
 pymysql
-flask_limiter
+flask-limiter
