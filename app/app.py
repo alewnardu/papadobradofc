@@ -13,7 +13,7 @@ limiter = Limiter(key_func=get_remote_address)
 # Função user_loader para carregar o usuário
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))  # Ajuste conforme o seu modelo de User
+    return User.query.get(int(user_id))
 
 def create_app():
     app = Flask(__name__, static_folder="static", template_folder="templates")
@@ -25,7 +25,6 @@ def create_app():
     migrate.init_app(app, db)
     login_manager.init_app(app)
     limiter.init_app(app)    
-
 
     # Registrar Blueprints
     app.register_blueprint(auth_bp)
