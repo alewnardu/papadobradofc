@@ -106,7 +106,16 @@ nav a:hover {
     color: #f8f9fa; /* Branco mais suave para efeito */
 }
 
-.alert {
-    max-width: 600px;
-    margin: 0 auto;
+/* Estilo adicional para toasts */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
 }
+
+.toast {
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+
