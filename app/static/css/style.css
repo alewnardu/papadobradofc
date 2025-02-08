@@ -15,6 +15,8 @@ body {
 
 h2 {
     text-align: center;
+    color: white; /* Texto branco em fundo claro */
+    font-weight: bold;
 }
 
 .form-group {
@@ -29,8 +31,9 @@ h2 {
 }
 
 .btn {
-    background-color: #007bff;
+    background-color: #28a745; /* Verde para fundo claro */
     color: white;
+    font-weight: bold; /* Texto mais forte */
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -38,5 +41,26 @@ h2 {
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #218838; /* Verde mais escuro no hover */
+}
+
+/* Ajustes para fundos escuros */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #333;
+        color: white;
+    }
+    .container {
+        background-color: #555;
+    }
+    h2 {
+        color: black; /* Texto preto em fundo escuro */
+    }
+    .btn {
+        background-color: #ffc107; /* Amarelo para fundo escuro */
+        color: black;
+    }
+    .btn:hover {
+        background-color: #e0a800; /* Amarelo mais escuro no hover */
+    }
 }
