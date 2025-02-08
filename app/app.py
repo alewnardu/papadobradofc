@@ -5,6 +5,10 @@ from flask_login import current_user
 from app.apps.auth.routes import auth_bp
 from app.apps.jogador.routes import jogador_bp
 from app.apps.auth.models import User
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
+limiter = Limiter(key_func=get_remote_address)
 
 # Função user_loader para carregar o usuário
 @login_manager.user_loader
@@ -20,6 +24,8 @@ def create_app():
     bcrypt.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
+    limiter.init_app(app)    
+
 
     # Registrar Blueprints
     app.register_blueprint(auth_bp)
