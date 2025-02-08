@@ -86,3 +86,22 @@ h2 {
         color: var(--text-light);
     }
 }
+
+/* Estilos para a barra de navegação */
+nav {
+    background-color: var(--primary-green);
+    padding: 10px 20px;
+    text-align: center;
+}
+
+nav a {
+    color: var(--text-light); /* Branco */
+    text-decoration: none;
+    font-weight: bold; /* Negrito */
+    margin: 0 15px;
+    font-size: 16px;
+}
+
+nav a:hover {
+    color: #f8f9fa; /* Branco mais suave para efeito */
+}
