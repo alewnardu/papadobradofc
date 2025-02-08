@@ -42,13 +42,15 @@ def logout():
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
-
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-        new_user = User(username=form.username.data, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        flash("Cadastro realizado com sucesso! Faça login.", "success")
-        login_user(new_user)
-        return redirect(url_for("index"))
+        try:
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
+            new_user = User(username=form.username.data, password=hashed_password)
+            db.session.add(new_user)
+            db.session.commit()
+            flash("Cadastro realizado com sucesso!", "success")
+            return redirect(url_for("index"))
+        except SQLAlchemyError:
+            db.session.rollback()
+            flash("Cadastro indisponível! Tente novamente mais tarde.", "warning")
     return render_template('auth/register.html', form=form)
