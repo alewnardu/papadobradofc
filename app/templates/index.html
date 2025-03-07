@@ -1,73 +1,67 @@
-<!DOCTYPE html>
-<html lang="pt">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Papa Dobrado - Início</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-          <a class="navbar-brand" href="{{ url_for('index') }}">Papa Dobrado</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto">
-                  <li class="nav-item">
-                      <a class="nav-link" href="{{ url_for('index') }}">Início</a>
-                  </li>
-                  
-                  {% if current_user.is_authenticated %}
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ url_for('index') }}">Dashboard</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ url_for('index') }}">Perfil</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt"></i> Sair</a>
-                      </li>
-                  {% else %}
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ url_for('auth.login') }}"><i class="fas fa-sign-in-alt"></i> Entrar</a>
-                      </li>
-                  {% endif %}
-              </ul>
-          </div>
-      </div>
-    </nav>
-    
-    <!-- Exibição de mensagens flash -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
-            {% for category, message in messages %}
-                <div class="toast align-items-center text-bg-{{ category }} border-0" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            {{ message }}
-                        </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-    {% endwith %}
+{% extends "base.html" %} {% block title %}Início - Papa Dobrado{% endblock %}
+{% block content %}
 
-    <!-- Conteúdo Principal -->
-    <div class="container mt-4">
-      <h1>Bem-vindo ao Papa Dobrado ⚽</h1>
-      <p>Gerencie suas partidas de futebol amador de forma fácil e organizada!</p>
-      <p>Não tem uma conta? <a class="text-muted" href="{{ url_for('auth.register') }}">Cadastre-se aqui</a>.</p>
+{% block extra_css %}
+{% endblock %}
+
+<h5>Bem-vindo à Papa Dobrado FC 🎉</h5>
+
+{% if evento %}
+<div class="card mt-3">
+  <div class="card-body">
+    <div class="row g-3">
+      <span class="text-muted col-12 col-md-6 col-lg-4 col-xl-3">
+        📅 Data: {{ evento.inicio.strftime("%d/%m/%Y - %H:%M") }}
+      </span>
+      <span class="text-muted col-12 col-md-6 col-lg-4 col-xl-3"
+        >🚩 Local: {{ evento.local }}</span
+      >
+      <span class="text-muted col-12 col-md-6 col-lg-4 col-xl-3"
+        >⏳ Duração: {{ evento.duracao }} minutos</span
+      >
+      <span class="text-muted col-12 col-md-6 col-lg-4 col-xl-3">
+        {% if evento.situacao.name == "PREVISTO" %} 🟡 {% elif
+        evento.situacao.name == "INICIADO" %} 🔵 {% elif evento.situacao.name
+        =='CANCELADO' %} 🔴 {% else %} 🟢 {% endif %} Situação: {{
+        evento.situacao.value }}
+      </span>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ url_for('static', filename='js/toast.js') }}"></script>
-  </body>
-</html>
+    <div class="card-footer row g-1 mt-3">
+      <div class="col-12 col-md-3 col-lg-2">
+        <a
+          href="{{ url_for('concentracao.listagem', id_evento=evento.id) }}"
+          class="btn btn-success text-white w-100"
+        >
+          📝 Chegada
+        </a>
+      </div>
+      <div class="col-12 col-md-3 col-lg-2">
+        <a
+          href="{{ url_for('time.listagem', id_evento=evento.id) }}"
+          class="btn btn-success text-white w-100"
+        >
+          👥 Times
+        </a>
+      </div>
+      <div class="col-12 col-md-3 col-lg-2">
+        <a
+          href="{{ url_for('partida.listagem', id_evento=evento.id) }}"
+          class="btn btn-success text-white w-100"
+        >
+          ⚽ Partidas
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="mt-3">
+  <p class="card-text">📅 Nenhum evento previsto no momento.</p>
+  <p class="card-text">
+    Acompanhe a organização de nossos eventos a qualquer momento. Agora a lista
+    de chegada, a formação dos times e o controle das partidas têm
+    acompanhamento facilitado de forma contínua e eficiente. 🚀
+  </p>
+</div>
+{% endif %} {% endblock %}
