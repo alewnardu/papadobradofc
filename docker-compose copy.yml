@@ -1,0 +1,48 @@
+services:
+  papadobradofc_app:
+    build: .
+    container_name: papadobradofc_app
+    restart: always
+    image: papadobradofc
+    depends_on:
+      - papadobradofc_db
+    environment:
+      - SECRET_KEY=minha_chave_secreta
+      - DB_USERNAME=papadobradofc
+      - DB_PASSWORD=Senh4ppfc
+      - DB_HOST=papadobradofc_db
+      - DB_NAME=papadobradofc
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    networks:
+      - papadobradofc_network
+    command: >
+      sh -c "./wait-for-db.sh &&
+             flask db init || true &&
+             flask db migrate -m 'Initial migration' || true &&
+             flask db upgrade &&
+             gunicorn -b 0.0.0.0:5000 app.app:app"
+
+  papadobradofc_db:
+    image: mysql:8.0
+    container_name: papadobradofc_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Senh4ppfc
+      MYSQL_DATABASE: papadobradofc
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - papadobradofc_network
+
+volumes:
+  mysql_data:
+
+networks:
+  papadobradofc_network:
+    driver: bridge

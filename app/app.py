@@ -1,14 +1,16 @@
 from flask import Flask, render_template
+from flask_login import current_user
 from app.config import Config
 from app.extensions import db, bcrypt, migrate, login_manager
-from flask_login import current_user
 from app.apps.auth.routes import auth_bp
+from app.apps.concentracao.routes import concentracao_bp
+from app.apps.escalacao.routes import escalacao_bp
+from app.apps.evento.routes import evento_bp
+from app.apps.gol.routes import gol_bp
 from app.apps.jogador.routes import jogador_bp
+from app.apps.partida.routes import partida_bp
+from app.apps.time.routes import time_bp
 from app.apps.auth.models import User
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
-
-limiter = Limiter(key_func=get_remote_address)
 
 # Função user_loader para carregar o usuário
 @login_manager.user_loader
@@ -24,24 +26,34 @@ def create_app():
     bcrypt.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
-    limiter.init_app(app)    
+    login_manager.login_view = "auth.login"  # Definir a view de login
 
     # Registrar Blueprints
     app.register_blueprint(auth_bp)
+    app.register_blueprint(concentracao_bp)
+    app.register_blueprint(escalacao_bp)
+    app.register_blueprint(evento_bp)
+    app.register_blueprint(gol_bp)
     app.register_blueprint(jogador_bp)
-
-    @app.context_processor
-    def inject_user():
-        return dict(current_user=current_user)
+    app.register_blueprint(partida_bp)
+    app.register_blueprint(time_bp)
     
-    @app.route('/')
-    def index():
-        return render_template('index.html')
-
-    login_manager.login_view = "auth.login"
-
     return app
 
+app = create_app()
+
+# Registrar context processor corretamente
+def inject_user():
+    return dict(current_user=current_user)
+
+app.context_processor(inject_user)
+
+# Rota de debug para verificar o usuário autenticado
+@app.route('/debug_user')
+def debug_user():
+    if current_user.is_authenticated:
+        return f"Usuário autenticado: {current_user.username}"
+    return "Usuário não autenticado"
+
 if __name__ == "__main__":
-    app = create_app()
     app.run(debug=True)
