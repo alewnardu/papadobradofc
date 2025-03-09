@@ -1,6 +1,6 @@
-from enum import Enum
+# from enum import Enum
     
-class SituacaoConcentracaoEnum(Enum):
-    DISPONIVEL = "DISPONIVEL"
-    INDISPONIVEL = "INDISPONIVEL"
+# class SituacaoConcentracaoEnum(Enum):
+#     DISPONIVEL = "DISPONIVEL"
+#     INDISPONIVEL = "INDISPONIVEL"
     
