@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_login import current_user
 from app.config import Config
 from app.extensions import db, bcrypt, migrate, login_manager
+from app.routes import home_bp
 from app.apps.auth.routes import auth_bp
 from app.apps.jogador.routes import jogador_bp
 from app.apps.auth.models import User
@@ -24,7 +25,7 @@ def create_app():
 
     # Registrar Blueprints
     app.register_blueprint(auth_bp)
-    app.register_blueprint(jogador_bp)
+    app.register_blueprint(jogador_bp)   
     
     return app
 
