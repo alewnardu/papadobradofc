@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_login import current_user
 from app.config import Config
 from app.extensions import db, bcrypt, migrate, login_manager
+from app.routes import home_bp
 from app.apps.auth.routes import auth_bp
 # from app.apps.concentracao.routes import concentracao_bp
 # from app.apps.escalacao.routes import escalacao_bp
