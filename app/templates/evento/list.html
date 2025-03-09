@@ -6,7 +6,7 @@
 {% if enable_cadastrar %}
 <div class="row g-3 mt-3">
   <div class="col-12 col-md-3 col-lg-2">
-    <a href="{{ url_for('evento.cadastro') }}" class="btn btn-success text-white w-100" style="min-width: 120px">➕ Novo Evento</a>
+    <a href="" class="btn btn-success text-white w-100" style="min-width: 120px">➕ Novo Evento</a>
   </div>
 </div>
 {% endif %} {% if eventos %}
@@ -31,7 +31,7 @@
         <div class="card-footer row g-1 mt-3">
           <div class="col-12 col-md-3 col-lg-2">
             <a
-              href="{{ url_for('concentracao.listagem', id_evento=evento.id) }}"
+              href=""
               class="btn btn-success text-white w-100"
             >
               📝 Chegada
@@ -40,7 +40,7 @@
 
           <div class="col-12 col-md-3 col-lg-2">
             <a
-              href="{{ url_for('time.listagem', id_evento=evento.id) }}"
+              href=""
               class="btn btn-success text-white w-100"
             >
               👥 Times
@@ -49,7 +49,7 @@
 
           <div class="col-12 col-md-3 col-lg-2">
             <a
-              href="{{ url_for('partida.listagem', id_evento=evento.id) }}"
+              href=""
               class="btn btn-success text-white w-100"
             >
               ⚽ Partidas
@@ -62,7 +62,7 @@
 
           <div class="col-12 col-md-3 col-lg-2">
             <a
-              href="{{ url_for('evento.remocao', id_evento=evento.id) }}"
+              href=""
               class="btn btn-success text-white w-100"
             >
               🗑 Remover
@@ -79,7 +79,7 @@
     <li class="page-item">
       <a
         class="page-link"
-        href="{{ url_for('evento.listagem', page=pagination.prev_num) }}"
+        href=""
         >Anterior</a
       >
     </li>
@@ -91,7 +91,7 @@
     <li class="page-item {% if num == pagination.page %}active{% endif %}">
       <a
         class="page-link"
-        href="{{ url_for('evento.listagem', page=num) }}"
+        href=""
         >{{ num }}</a
       >
     </li>
@@ -103,7 +103,7 @@
     <li class="page-item">
       <a
         class="page-link"
-        href="{{ url_for('evento.listagem', page=pagination.next_num) }}"
+        href=""
         >Próximo</a
       >
     </li>
