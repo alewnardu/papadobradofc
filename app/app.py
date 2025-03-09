@@ -30,6 +30,7 @@ def create_app():
     login_manager.login_view = "auth.login"  # Definir a view de login
 
     # Registrar Blueprints
+    app.register_blueprint(home_bp)
     app.register_blueprint(auth_bp)
     # app.register_blueprint(concentracao_bp)
     # app.register_blueprint(escalacao_bp)
