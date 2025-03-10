@@ -6,7 +6,7 @@ from app.apps.auth.forms import LoginForm, RegistrationForm
 from app.apps.auth.models import User
 # from app.apps.jogador.models import Jogador
 
-auth_bp = Blueprint('auth', __name__, url_prefix='/autenticacao',template_folder="../../templates/")
+auth_bp = Blueprint('auth', __name__, url_prefix='/', template_folder="../../templates/")
 
 @auth_bp.route("/usuarios/listagem", methods=['GET'])
 @login_required
