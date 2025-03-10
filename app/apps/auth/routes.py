@@ -53,41 +53,41 @@ def logout():
     flash('Sessão encerrada!', 'success')
     return redirect(url_for('home.home'))
 
-# @auth_bp.route("/register", methods=["GET", "POST"])
-# def register():
-#     form = RegistrationForm()
-#     if form.validate_on_submit():
-#         try:
-#             if User.query.filter_by(username=form.username.data).first() is not None:
-#                 raise Exception(f'O nome "{form.username.data}" de usuário já utilizado! Tente novamente outro nome.')
+@auth_bp.route("/register", methods=["GET", "POST"])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        try:
+            if User.query.filter_by(username=form.username.data).first() is not None:
+                raise Exception(f'O nome "{form.username.data}" de usuário já utilizado! Tente novamente outro nome.')
         
-#             hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-#             new_user = User(username=form.username.data, password=hashed_password)
-#             db.session.add(new_user)
-#             db.session.commit()
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
+            new_user = User(username=form.username.data, password=hashed_password)
+            db.session.add(new_user)
+            db.session.commit()
             
-#             perfil_jogador = Jogador(
-#                 nome_camisa=new_user.username,
-#                 numero_camisa=User.query.count() + 1,
-#                 nome_completo=new_user.username,
-#                 user_id=new_user.id
-#             )
-#             db.session.add(perfil_jogador)
-#             db.session.commit()
-#             flash("Cadastro realizado com sucesso! Acione um administrador para ativar sua conta.", "success")
-#             return redirect(url_for("home.home"))
-#         except IntegrityError as e:
-#             db.session.rollback()
-#             print(f"Erro de integridade: {str(e)}")
-#             flash("Este nome de usuário já está em uso. Escolha outro.", "warning")
+            # perfil_jogador = Jogador(
+            #     nome_camisa=new_user.username,
+            #     numero_camisa=User.query.count() + 1,
+            #     nome_completo=new_user.username,
+            #     user_id=new_user.id
+            # )
+            # db.session.add(perfil_jogador)
+            # db.session.commit()
+            flash("Cadastro realizado com sucesso! Acione um administrador para ativar sua conta.", "success")
+            return redirect(url_for("home.home"))
+        except IntegrityError as e:
+            db.session.rollback()
+            print(f"Erro de integridade: {str(e)}")
+            flash("Este nome de usuário já está em uso. Escolha outro.", "warning")
 
-#         except SQLAlchemyError as e:
-#             db.session.rollback()
-#             print(f"Erro no banco de dados ao cadastrar usuário: {str(e)}")
-#             flash("Erro ao cadastrar! Tente novamente mais tarde.", "warning")
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            print(f"Erro no banco de dados ao cadastrar usuário: {str(e)}")
+            flash("Erro ao cadastrar! Tente novamente mais tarde.", "warning")
 
-#         except Exception as e:
-#             db.session.rollback()
-#             print(f"Erro inesperado: {str(e)}")
-#             flash("Ocorreu um erro inesperado. Tente novamente.", "danger")
-#     return render_template('auth/register.html', form=form)
+        except Exception as e:
+            db.session.rollback()
+            print(f"Erro inesperado: {str(e)}")
+            flash("Ocorreu um erro inesperado. Tente novamente.", "danger")
+    return render_template('auth/register.html', form=form)
