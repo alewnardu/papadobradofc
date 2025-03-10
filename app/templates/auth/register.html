@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Cadastro - Papa Dobrado{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Cadastro de Usuário</h2>
+    <form method="POST" action="{{ url_for('register') }}">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="username">Nome de Usuário</label>
+            {{ form.username(class="form-control", id="username") }}
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            {{ form.password(class="form-control", id="password") }}
+        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirmar Senha</label>
+            {{ form.confirm_password(class="form-control", id="confirm_password") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+    <p>Já tem uma conta? <a href="{{ url_for('login') }}">Faça login</a></p>
+</div>
+{% block content %}

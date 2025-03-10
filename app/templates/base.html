@@ -1,180 +1,192 @@
 <!DOCTYPE html>
 <html lang="pt">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,300,400,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/icon-font.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/fancybox.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/odometer.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_toast.css') }}">
-    
-    <title>{% block title %}Papa Dobrado{% endblock %}</title>
-    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/fivicon/favicon-96x96.png') }}">
-    <meta name="description" content="Papa Dobrado FC - Controle de partidas de futebol amador.">
-    {% block extra_css %}{% endblock %}
-  </head>
-  <body>
-    <div class="preloader">
-        <figure> <img src="{{ url_for('static', filename='img/fivicon/favicon-96x96.png') }}" alt="Image"> </figure>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:100,300,400,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/icon-font.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fancybox.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/odometer.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_toast.css') }}">
+
+  <title>{% block title %}Papa Dobrado{% endblock %}</title>
+  <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='img/fivicon/favicon-96x96.png') }}">
+  <meta name="description" content="Papa Dobrado FC - Controle de partidas de futebol amador.">
+  {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+  <div class="preloader">
+    <figure> <img src="{{ url_for('static', filename='img/fivicon/favicon-96x96.png') }}" alt="Image"> </figure>
+  </div>
+  <div class="page-transition"></div>
+  <aside class="side-widget">
+    <div class="inner">
+      <!-- Logo Menu Mobile -->
+      <div class="logo"> <a href="{{ url_for('home.home') }}"><img
+            src="{{ url_for('static', filename='img/fivicon/favicon-96x96.png') }}" alt="Image"></a> </div>
+      <div class="hide-mobile">
+        <h6 class="widget-title">CONTACT INFO</h6>
+        <address class="address">
+          <p>+1 (234) 567 89 10<br>
+            <a href="#">example@example.com</a>
+          </p>
+        </address>
       </div>
-    <div class="page-transition"></div>
-    <aside class="side-widget">
-        <div class="inner">
-        <!-- Logo Menu Mobile -->
-          <div class="logo"> <a href="{{ url_for('home.home') }}"><img src="{{ url_for('static', filename='img/fivicon/favicon-96x96.png') }}" alt="Image"></a> </div>
-          <div class="hide-mobile">
-            <h6 class="widget-title">CONTACT INFO</h6>
-            <address class="address">
-            <p>+1 (234) 567 89 10<br>
-              <a href="#">example@example.com</a></p>
-            </address>
-          </div>
-          <div class="show-mobile">
-            <div class="site-menu">
-                <ul class="menu">
-                    <li><a href="{{ url_for('home.home') }}">Home</a></li>
-                    <li><a href="{{ url_for('home.home') }}">Fixtures & Results</a></li>
-                    <li><a href="{{ url_for('home.home') }}">League Table</a></li>
-                    <li><a href="{{ url_for('home.home') }}">Players</a></li>
-                    <li><a href="{{ url_for('home.home') }}">Gallery</a></li>
-                    <li><a href="{{ url_for('home.home') }}">Blog</a></li>
-                    <li><a href="{{ url_for('home.home') }}">Contact</a></li>
-                </ul>
-              </div>
-          </div>
-          <small>© 2024 - Football Club</small> </div>
-      </aside>
-      <nav class="navbar">
-        <div class="container">
-            <div class="top-navigation-right">
-                <div class="top-social-wrapper">
-                <div class="social-icon">
-                <a href="#">
-                <img width="32" height="32" src="{{ url_for('static', filename='img/facebook.png') }}" alt="Facebook">
-                </a>
-                </div>
-                <div class="social-icon">
-                <a href="#">
-                <img width="32" height="32" src="{{ url_for('static', filename='img/instagram.png') }}" alt="Instagram">
-                </a>
-                </div>
-                <div class="social-icon">
-                <a href="#">
-                <img width="32" height="32" src="{{ url_for('static', filename='img/twitter.png') }}" alt="Twitter">
-                </a>
-                </div>
-                </div>
-            </div>
-          <div class="logo"> <a href="{{ url_for('home.home') }}"><img src="{{ url_for('static', filename='img/logo-ppfc.png') }}" alt="Image"></a> </div>
-          <div class="site-menu">
-            <ul class="menueffect">
+      <div class="show-mobile">
+        <div class="site-menu">
+          <ul class="menu">
             <li><a href="{{ url_for('home.home') }}">Home</a></li>
-            <li><a href="{{ url_for('home.home') }}">Eventos</a></li>
-            <li><a href="{{ url_for('home.home') }}">Partidas</a></li>
-            <li><a href="{{ url_for('home.home') }}">Jogadores</a></li>
-            <li><a href="{{ url_for('home.home') }}">Usuários</a></li>
-            <li><a href="{{ url_for('home.home') }}">Regulamentos</a></li>
-            <li><a href="{{ url_for('home.home') }}">Constatos</a></li>
+            <li><a href="{{ url_for('home.home') }}">Fixtures & Results</a></li>
+            <li><a href="{{ url_for('home.home') }}">League Table</a></li>
+            <li><a href="{{ url_for('home.home') }}">Players</a></li>
+            <li><a href="{{ url_for('home.home') }}">Gallery</a></li>
+            <li><a href="{{ url_for('home.home') }}">Blog</a></li>
+            <li><a href="{{ url_for('home.home') }}">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <small>© 2024 - Football Club</small>
+    </div>
+  </aside>
+  <nav class="navbar">
+    <div class="container">
+      <div class="top-navigation-right">
+        <div class="top-social-wrapper">
+          <div class="social-icon">
+            <a href="#">
+              <img width="32" height="32" src="{{ url_for('static', filename='img/facebook.png') }}" alt="Facebook">
+            </a>
+          </div>
+          <div class="social-icon">
+            <a href="#">
+              <img width="32" height="32" src="{{ url_for('static', filename='img/instagram.png') }}" alt="Instagram">
+            </a>
+          </div>
+          <div class="social-icon">
+            <a href="#">
+              <img width="32" height="32" src="{{ url_for('static', filename='img/twitter.png') }}" alt="Twitter">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="logo"> <a href="{{ url_for('home.home') }}"><img
+            src="{{ url_for('static', filename='img/logo-ppfc.png') }}" alt="Image"></a> </div>
+      <div class="site-menu">
+        <ul class="menueffect">
+          <li><a href="{{ url_for('home.home') }}">Home</a></li>
+          <li><a href="{{ url_for('home.home') }}">Eventos</a></li>
+          <li><a href="{{ url_for('home.home') }}">Partidas</a></li>
+          <li><a href="{{ url_for('home.home') }}">Jogadores</a></li>
+          <li><a href="{{ url_for('home.home') }}">Usuários</a></li>
+          <li><a href="{{ url_for('home.home') }}">Regulamentos</a></li>
+          <li><a href="{{ url_for('home.home') }}">Constatos</a></li>
+        </ul>
+      </div>
+      <div class="hamburger-menu"> <span></span> <span></span> <span></span> </div>
+    </div>
+  </nav>
+  <header class="page-header" data-background="{{ url_for('static', filename='img/escalacao.png') }}">
+    <div class="container">
+      <h2>League Table</h2>
+    </div>
+    <!-- end container -->
+  </header>
+  <main>
+    <div class="bosluk4pps"></div>
+
+    <!-- Conteúdo principal -->
+    <div>{% block content %}{% endblock %}</div>
+
+    <!--Footer Alanı-->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-3 col-lg-4">
+            <div class="logo"> <img src="{{ url_for('static', filename='img/logo-ppfc.png') }}" alt="Image"> </div>
+            <!-- end logo -->
+            <div class="footer-info">
+              <p><i class="flaticon-call iconpfooter"></i>&nbsp;&nbsp;&nbsp;+123 456 789</p><br>
+              <div class="bosluk04"></div>
+              <p><i class="flaticon-email iconpfooter"></i>&nbsp;&nbsp;&nbsp;example@example.com</p><br>
+              <p><i class="flaticon-location iconpfooter"></i>New Jersey, America</p>
+            </div>
+            <!-- end footer-info -->
+            <ul class="footer-social">
+              <li><a href="#"><img width="25" height="25" src="{{ url_for('static', filename='img/logo-ppfc.png') }}"
+                    alt="Facebook"></a></li>
+              <li><a href="#"><img width="25" height="25" src="{{ url_for('static', filename='img/logo-ppfc.png') }}"
+                    alt="Instagram"></a></li>
+              <li><a href="#"><img width="25" height="25" src="{{ url_for('static', filename='img/logo-ppfc.png') }}"
+                    alt="Twitter"></a></li>
             </ul>
           </div>
-          <div class="hamburger-menu"> <span></span> <span></span> <span></span> </div>
+          <!-- end col-3 -->
+          <div class="col-lg-4">
+            <h6 class="widget-title">Football Club - Sport Clubs</h6>
+            <p class="footerp">
+              You can see all the fixtures and leagues on our platform where we display
+              International Football History and Statistics. We inform you about sports
+              by making special posts for football clubs.
+            </p><br>
+
+            <a href="{{ url_for('home.home') }}" class="custom-button">CONTACT US</a>
+          </div>
+          <!-- end col-4 -->
+          <div class="col-lg-2 offset-xl-1 col-sm-6">
+            <h6 class="widget-title">Education</h6>
+            <ul class="footer-menu">
+              <li><a href="{{ url_for('home.home') }}">League Standings</a></li>
+              <li><a href="{{ url_for('home.home') }}">Fixtures</a></li>
+              <li><a href="{{ url_for('home.home') }}">Players</a></li>
+              <li><a href="{{ url_for('home.home') }}">Gallery</a></li>
+            </ul>
+          </div>
+          <!-- end col-2 -->
+          <div class="col-lg-2 col-sm-6">
+            <h6 class="widget-title">Quick Links</h6>
+            <ul class="footer-menu">
+              <li><a href="{{ url_for('home.home') }}">Home</a></li>
+              <li><a href="{{ url_for('home.home') }}">Gallery</a></li>
+              <li><a href="{{ url_for('home.home') }}">Blog</a></li>
+              <li><a href="{{ url_for('home.home') }}">Contact</a></li>
+            </ul>
+          </div>
+          <!-- end col-2 -->
+          <div class="col-12">
+            <p class="copyright">© 2024 Football Club - All Rights Reserved.</p>
+          </div>
+          <!-- end col-12 -->
         </div>
-      </nav>
-      <header class="page-header" data-background="{{ url_for('static', filename='img/escalacao.png') }}">
-        <div class="container">
-          <h2>League Table</h2>
-        </div>
-        <!-- end container --> 
-      </header>
-    <main>
-        <div class="bosluk4pps"></div>
+        <!-- end row -->
+      </div>
+      <div id="top" style="cursor: pointer;">
+        <img width="50" height="50" src="{{ url_for('static', filename='img/logo-ppfc.png') }}" alt="" />
+      </div>
+      <script src="{{ url_for('static', filename='js/team.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/fancybox.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/swiper.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/odometer.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/3d.jquery.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/pointer.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/toast.js') }}"></script>
+      <!--Cursor Script-->
+      <script>
+        init_pointer({
 
-        <!-- Conteúdo principal -->
-        <div>{% block content %}{% endblock %}</div>
-
-        <!--Footer Alanı-->
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                  <div class="col-xl-3 col-lg-4">
-                    <div class="logo"> <img src="{{ url_for('static', filename='img/logo-ppfc.png') }}" alt="Image"> </div>
-                    <!-- end logo -->
-                    <div class="footer-info">
-                        <p><i class="flaticon-call iconpfooter"></i>&nbsp;&nbsp;&nbsp;+123 456 789</p><br>
-                        <div class="bosluk04"></div>
-                        <p><i class="flaticon-email iconpfooter"></i>&nbsp;&nbsp;&nbsp;example@example.com</p><br>
-                        <p><i class="flaticon-location iconpfooter"></i>New Jersey, America</p>
-                    </div>
-                    <!-- end footer-info -->
-                    <ul class="footer-social">
-                      <li><a href="#"><img width="25" height="25" src="{{ url_for('static', filename='img/logo-ppfc.png') }}" alt="Facebook"></a></li>
-                      <li><a href="#"><img width="25" height="25" src="{{ url_for('static', filename='img/logo-ppfc.png') }}" alt="Instagram"></a></li>
-                      <li><a href="#"><img width="25" height="25" src="{{ url_for('static', filename='img/logo-ppfc.png') }}" alt="Twitter"></a></li>
-                    </ul>
-                  </div>
-                  <!-- end col-3 -->
-                  <div class="col-lg-4">
-                    <h6 class="widget-title">Football Club - Sport Clubs</h6>
-                    <p class="footerp">
-                        You can see all the fixtures and leagues on our platform where we display 
-                        International Football History and Statistics. We inform you about sports 
-                        by making special posts for football clubs.
-                    </p><br>
-
-                    <a href="{{ url_for('home.home') }}" class="custom-button">CONTACT US</a> </div>
-                  <!-- end col-4 -->
-                  <div class="col-lg-2 offset-xl-1 col-sm-6">
-                    <h6 class="widget-title">Education</h6>
-                    <ul class="footer-menu">
-                        <li><a href="{{ url_for('home.home') }}">League Standings</a></li>
-                        <li><a href="{{ url_for('home.home') }}">Fixtures</a></li>
-                        <li><a href="{{ url_for('home.home') }}">Players</a></li>
-                        <li><a href="{{ url_for('home.home') }}">Gallery</a></li>
-                    </ul>
-                  </div>
-                  <!-- end col-2 -->
-                  <div class="col-lg-2 col-sm-6">
-                    <h6 class="widget-title">Quick Links</h6>
-                    <ul class="footer-menu">
-                        <li><a href="{{ url_for('home.home') }}">Home</a></li>
-                        <li><a href="{{ url_for('home.home') }}">Gallery</a></li>
-                        <li><a href="{{ url_for('home.home') }}">Blog</a></li>
-                        <li><a href="{{ url_for('home.home') }}">Contact</a></li>
-                    </ul>
-                  </div>
-                  <!-- end col-2 -->
-                  <div class="col-12">
-                    <p class="copyright">© 2024 Football Club - All Rights Reserved.</p>
-                  </div>
-                  <!-- end col-12 --> 
-                </div>
-                <!-- end row --> 
-              </div>
-            <div id="top" style="cursor: pointer;">
-                <img width="50" height="50" src="{{ url_for('static', filename='img/logo-ppfc.png') }}" alt=""/>
-            </div>
-            <script src="{{ url_for('static', filename='js/team.js') }}"></script>
-            <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script> 
-            <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> 
-            <script src="{{ url_for('static', filename='js/fancybox.min.js') }}"></script> 
-            <script src="{{ url_for('static', filename='js/swiper.min.js') }}"></script> 
-            <script src="{{ url_for('static', filename='js/odometer.min.js') }}"></script> 
-            <script src="{{ url_for('static', filename='js/wow.min.js') }}"></script> 
-            <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-            <script src="{{ url_for('static', filename='js/3d.jquery.js') }}"></script>
-            <script src="{{ url_for('static', filename='js/pointer.js') }}"></script>
-            <!--Cursor Script-->                    
-            <script>
-                init_pointer({
-                    
-                })
-            </script>
-        </footer>
+        })
+      </script>
+    </footer>
 </body>
+
 </html>
